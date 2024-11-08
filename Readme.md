@@ -88,5 +88,6 @@ package.json
 
 ```
 .env
-node_modules 
+node_modules
+package-lock.json
 ```
