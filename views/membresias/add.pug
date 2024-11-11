@@ -1,0 +1,20 @@
+extends ../templates/layout
+
+block content 
+    h3 Añadir una nueva membresía
+        div 
+            form(action="/membresias/add", method="post") 
+                label(for="tipo") Tipo:
+                input(type="text", name="tipo")
+                br
+                label(for="costo") Costo:
+                input(type="number", name="costo", step="0.01")
+                br
+                label(for="duracion_dias") Duración en días:
+                input(type="number", name="duracion_dias")
+                br
+                label(for="descripcion") Descripción:
+                textarea(name="descripcion")
+                br
+                input(type="submit", value="Enviar")
+
