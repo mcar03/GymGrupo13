@@ -88,43 +88,47 @@ DELIMITER ;
 
 -- Insertar Clientes
 INSERT INTO clientes (nombre, apellidos, telefono, email, direccion, fecha_nacimiento) VALUES
-('Juan', 'Perez Gomez', '123456789', 'juan.perez@gmail.com', 'Calle Falsa 123', '1990-01-15'),
-('Ana', 'Gomez Martinez', '987654321', 'ana.gomez@gmail.com', 'Av. Principal 456', '1985-06-20'),
-('Luis', 'Martinez Lopez', '234567890', 'luis.martinez@gmail.com', 'Calle Secundaria 789', '1992-03-10'),
-('Maria', 'Lopez Ramirez', '345678901', 'maria.lopez@gmail.com', 'Calle 5 de Mayo 234', '1988-09-12'),
-('Carlos', 'Ramirez Torres', '456789012', 'carlos.ramirez@gmail.com', 'Av. Libertad 567', '1993-11-30'),
-('Elena', 'Torres Sanchez', '567890123', 'elena.torres@gmail.com', 'Calle Sol 890', '1995-07-25'),
-('Roberto', 'Sanchez Castro', '678901234', 'roberto.sanchez@gmail.com', 'Av. Norte 345', '1989-04-10'),
-('Lucia', 'Castro Diaz', '789012345', 'lucia.castro@gmail.com', 'Calle Sur 123', '1994-10-20'),
-('Pedro', 'Diaz Hernandez', '890123456', 'pedro.diaz@gmail.com', 'Av. Central 101', '1990-12-05');
+('Luis', 'Perez', '555-6983', 'cliente1@gymcorreo.com', 'Calle Secundaria 789', '1992-03-10'),
+('Sofia', 'Gomez', '555-6896', 'cliente2@gymcorreo.com', 'Av. Principal 456', '1985-06-20'),
+('Ana', 'Lopez', '555-6864', 'cliente3@gymcorreo.com', 'Calle 5 de Mayo 234', '1988-09-12'),
+('Ana', 'Martinez', '555-4611', 'cliente4@gymcorreo.com', 'Calle Sol 890', '1986-07-15'),
+('Sofia', 'Torres', '555-1593', 'cliente5@gymcorreo.com', 'Av. Libertad 567', '1993-11-30'),
+('Luis', 'Hernandez', '555-1116', 'cliente6@gymcorreo.com', 'Calle Sur 123', '1995-07-25'),
+('Sofia', 'Diaz', '555-2996', 'cliente7@gymcorreo.com', 'Calle 5 de Mayo 234', '1990-12-05'),
+('José', 'Castro', '555-9572', 'cliente8@gymcorreo.com', 'Av. Central 101', '1992-06-26'),
+('Lucía', 'Ramirez', '555-3335', 'cliente9@gymcorreo.com', 'Calle Falsa 123', '1990-01-15');
 
--- Insertar Membresías
+-- Insertar Membresías/Planes
+-- Consideramos que un "plan" es equivalente a una "membresía"
 INSERT INTO membresias (tipo, costo, duracion_dias, descripcion) VALUES
 ('Mensual', 30.00, 30, 'Membresía mensual que permite acceso a todas las instalaciones.'),
 ('Trimestral', 80.00, 90, 'Membresía trimestral con descuento.'),
 ('Anual', 300.00, 365, 'Membresía anual con acceso ilimitado y beneficios adicionales.');
 
+-- Insertar Inscripciones a Membresías (equivalente a inscripciones de planes)
+-- ID_Cliente -> corresponde a los clientes 1 a 9
+-- ID_Membresia -> 1 (Mensual), 2 (Trimestral), 3 (Anual)
+INSERT INTO inscripciones_membresias (cliente_id, membresia_id) VALUES
+(1, 1), -- Luis con Membresía Mensual
+(2, 2), -- Sofia con Membresía Trimestral
+(3, 1), -- Ana con Membresía Mensual
+(4, 1), -- Ana con Membresía Mensual
+(5, 2), -- Sofia con Membresía Trimestral
+(6, 1), -- Luis con Membresía Mensual
+(7, 2), -- Sofia con Membresía Trimestral
+(8, 3), -- José con Membresía Anual
+(9, 1); -- Lucía con Membresía Mensual
+
 -- Insertar Entrenadores
 INSERT INTO entrenadores (nombre, apellido, especialidad, salario) VALUES
-('Fernando', 'Gonzalez', 'Fitness', 1500.00),
-('Laura', 'Martinez', 'Yoga', 1200.00),
-('Javier', 'Lopez', 'Pilates', 1300.00);
+('Lucía', 'Gomez', 'Crossfit', 1500.00),
+('José', 'Diaz', 'Pesas', 1200.00),
+('María', 'Lopez', 'Crossfit', 1300.00),
+('Lucía', 'Martinez', 'Crossfit', 1500.00),
+('Carlos', 'Ramirez', 'Pesas', 1100.00);
 
 -- Insertar Clases
 INSERT INTO clases (nombre, descripcion, capacidad, duracion_minutos, entrenador_id) VALUES
 ('Clase de Zumba', 'Clase divertida de baile y ejercicio.', 20, 60, 1),
 ('Clase de Yoga', 'Clase de relajación y estiramiento.', 15, 75, 2),
 ('Clase de Pilates', 'Clase enfocada en el fortalecimiento del core.', 10, 60, 3);
-
--- Insertar Inscripciones a Membresías
--- Se asume que ya existen 9 clientes, por lo que los IDs van de 1 a 9
-INSERT INTO inscripciones_membresias (cliente_id, membresia_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 1),
-(5, 2),
-(6, 3),
-(7, 1),
-(8, 2),
-(9, 3);
