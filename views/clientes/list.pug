@@ -1,0 +1,35 @@
+extends ../templates/layout
+
+block content
+    div 
+        h3 Listado de clientes
+        table(border=1)
+            thead 
+                tr
+                    th ID
+                    th Nombre
+                    th Apellidos
+                    th Teléfono
+                    th Email
+                    th Dirección
+                    th Fecha de Nacimiento
+                    th Fecha de Registro
+                    th Borrar
+                    th Editar
+            tbody 
+                each cliente in clientes
+                    tr 
+                        td=cliente.cliente_id
+                        td=cliente.nombre
+                        td=cliente.apellidos
+                        td=cliente.telefono
+                        td=cliente.email
+                        td=cliente.direccion
+                        td=cliente.fecha_nacimiento
+                        td=cliente.fecha_registro
+                        td 
+                            a(href=`/clientes/del/${cliente.cliente_id}`) Borrar
+                        td 
+                            a(href=`/clientes/edit/${cliente.cliente_id}`) Editar
+        p 
+            a(href="/clientes/add") Añadir un cliente nuevo

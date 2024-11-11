@@ -1,0 +1,26 @@
+extends ../templates/layout
+
+block content 
+    h3 Editar una inscripción a membresía
+        div 
+            form(action=`/inscripciones_membresias/edit/${inscripcion.inscripcion_id}`, method="post") 
+                label(for="cliente_id") Cliente ID:
+                input(type="number", name="cliente_id", value=`${inscripcion.cliente_id}`)
+                br
+                label(for="membresia_id") Membresía ID:
+                input(type="number", name="membresia_id", value=`${inscripcion.membresia_id}`)
+                br
+                label(for="fecha_inicio") Fecha de inicio:
+                input(type="text", name="fecha_inicio", value=`${inscripcion.fecha_inicio}`, disabled)
+                br
+                label(for="fecha_fin") Fecha de fin:
+                input(type="date", name="fecha_fin", value=`${inscripcion.fecha_fin}`)
+                br
+                label(for="estado") Estado:
+                select(name="estado")
+                    option(value="activa", selected=inscripcion.estado === 'activa') Activa
+                    option(value="inactiva", selected=inscripcion.estado === 'inactiva') Inactiva
+                br
+                input(type="hidden", name="inscripcion_id", value=`${inscripcion.inscripcion_id}`)
+                input(type="submit", value="Guardar cambios")
+

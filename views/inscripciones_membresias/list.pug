@@ -1,0 +1,31 @@
+extends ../templates/layout
+
+block content
+    div 
+        h3 Listado de inscripciones a membresías
+        table(border=1)
+            thead 
+                tr
+                    th ID
+                    th Cliente ID
+                    th Membresía ID
+                    th Fecha de Inicio
+                    th Fecha de Fin
+                    th Estado
+                    th Borrar
+                    th Editar
+            tbody 
+                each inscripcion in inscripciones
+                    tr 
+                        td=inscripcion.inscripcion_id
+                        td=inscripcion.cliente_id
+                        td=inscripcion.membresia_id
+                        td=inscripcion.fecha_inicio
+                        td=inscripcion.fecha_fin
+                        td=inscripcion.estado
+                        td 
+                            a(href=`/inscripciones_membresias/del/${inscripcion.inscripcion_id}`) Borrar
+                        td 
+                            a(href=`/inscripciones_membresias/edit/${inscripcion.inscripcion_id}`) Editar
+        p 
+            a(href="/inscripciones_membresias/add") Añadir una nueva inscripción a membresía

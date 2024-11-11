@@ -1,0 +1,25 @@
+extends ../templates/layout
+
+block content 
+    h3 Añadir un nuevo cliente
+        div 
+            form(action="/clientes/add", method="post") 
+                label(for="nombre") Nombre:
+                input(type="text", name="nombre")
+                br
+                label(for="apellidos") Apellidos:
+                input(type="text", name="apellidos")
+                br
+                label(for="telefono") Teléfono:
+                input(type="text", name="telefono")
+                br
+                label(for="email") Email:
+                input(type="email", name="email")
+                br
+                label(for="direccion") Dirección:
+                input(type="text", name="direccion")
+                br
+                label(for="fecha_nacimiento") Fecha de nacimiento:
+                input(type="date", name="fecha_nacimiento")
+                br
+                input(type="submit", value="Enviar")
