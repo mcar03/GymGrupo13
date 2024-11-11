@@ -1,0 +1,32 @@
+extends ../templates/layout
+
+block content
+    div 
+        h3 Listado de membresías
+        table(border=1)
+            thead 
+                tr
+                    th ID
+                    th Tipo
+                    th Costo
+                    th Duración (días)
+                    th Descripción
+                    th Fecha de Registro
+                    th Borrar
+                    th Editar
+            tbody 
+                each membresia in membresias
+                    tr 
+                        td=membresia.membresia_id
+                        td=membresia.tipo
+                        td=membresia.costo
+                        td=membresia.duracion_dias
+                        td=membresia.descripcion
+                        td=membresia.fecha_registro
+                        td 
+                            a(href=`/membresias/del/${membresia.membresia_id}`) Borrar
+                        td 
+                            a(href=`/membresias/edit/${membresia.membresia_id}`) Editar
+        p 
+            a(href="/membresias/add") Añadir una nueva membresía
+

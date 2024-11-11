@@ -1,0 +1,21 @@
+extends ../templates/layout
+
+block content 
+    h3 Añadir una nueva inscripción a membresía
+        div 
+            form(action="/inscripciones_membresias/add", method="post") 
+                label(for="cliente_id") Cliente:
+                input(type="number", name="cliente_id") 
+                br
+                label(for="membresia_id") Membresía:
+                input(type="number", name="membresia_id")
+                br
+                label(for="fecha_fin") Fecha de fin:
+                input(type="date", name="fecha_fin")
+                br
+                label(for="estado") Estado:
+                select(name="estado")
+                    option(value="activa") Activa
+                    option(value="inactiva") Inactiva
+                br
+                input(type="submit", value="Enviar")
