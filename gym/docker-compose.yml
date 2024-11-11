@@ -8,7 +8,7 @@ services:
     ports:
       - ${ADMINER_PORT}:8080
 
-  db-gesaca:
+  db-gym:
     image: mysql:latest
     restart: "no"
     environment:
