@@ -1,0 +1,8 @@
+extends ../templates/layout
+
+block content
+  h1 Eliminar Entrenador
+  p ¿Estás seguro de que deseas eliminar al entrenador: #{entrenador.nombre} #{entrenador.apellido}?
+  form(action=`/entrenadores/delete/${entrenador.entrenador_id}`, method="POST")
+    button(type="submit") Sí, Eliminar
+    a(href="/entrenadores") No, Volver a la lista
