@@ -1,7 +1,11 @@
 const mysql = require('mysql2'); 
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 
 require('dotenv').config({ path: 'gym/.env' }); 
+=======
+require('dotenv').config({ path: 'gesaca/.env' }); 
+>>>>>>> 7b2fae91398405e2ac15ecfaf1bbe4a157bb7d58
 
 /**
  * Conectamos a la base de datos
@@ -23,4 +27,8 @@ db.connect(err => {
     console.log('Conexión exitosa a MySQL');
   });
 
+<<<<<<< HEAD
 module.exports=db;
+=======
+  module.exports=db;
+>>>>>>> 7b2fae91398405e2ac15ecfaf1bbe4a157bb7d58
