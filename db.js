@@ -1,5 +1,5 @@
 const mysql = require('mysql2'); 
-require('dotenv').config({ path: 'gesaca/.env' }); 
+require('dotenv').config({ path: 'gym/.env' }); 
 
 /**
  * Conectamos a la base de datos
