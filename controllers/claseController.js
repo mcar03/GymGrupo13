@@ -17,7 +17,7 @@ exports.listarClases = (req, res) => {
       console.error('Error al obtener las clases:', err);
       return res.status(500).send('Error al obtener las clases');
     }
-    res.render('listClases', { clases: resultados });
+    res.render('clases/list', { clases: resultados });
   });
 };
 
@@ -28,7 +28,7 @@ exports.mostrarFormularioAgregar = (req, res) => {
       console.error('Error al obtener los entrenadores:', err);
       return res.status(500).send('Error al obtener los entrenadores');
     }
-    res.render('addClase', { entrenadores: entrenadores });
+    res.render('clases/add', { entrenadores: entrenadores });
   });
 };
 
@@ -39,7 +39,7 @@ exports.agregarClase = (req, res) => {
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.render('addClase', { errors: errors.array(), entrenadores: req.entrenadores });
+    return res.render('clases/add', { errors: errors.array(), entrenadores: req.entrenadores });
   }
 
   const query = `
@@ -77,7 +77,7 @@ exports.mostrarFormularioEditar = (req, res) => {
         return res.status(500).send('Error al obtener los entrenadores');
       }
 
-      res.render('editClase', { clase: claseResults[0], entrenadores: entrenadores });
+      res.render('clases/edit', { clase: claseResults[0], entrenadores: entrenadores });
     });
   });
 };
@@ -90,7 +90,7 @@ exports.editarClase = (req, res) => {
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.render('editClase', { errors: errors.array(), clase: req.body, entrenadores: req.entrenadores });
+    return res.render('clases/edit', { errors: errors.array(), clase: req.body, entrenadores: req.entrenadores });
   }
 
   const query = `
@@ -120,7 +120,7 @@ exports.mostrarFormularioEliminar = (req, res) => {
     if (results.length === 0) {
       return res.status(404).send('Clase no encontrada');
     }
-    res.render('delClase', { clase: results[0] });
+    res.render('clases/del', { clase: results[0] });
   });
 };
 
