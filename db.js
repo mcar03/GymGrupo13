@@ -1,4 +1,6 @@
 const mysql = require('mysql2'); 
+const bcrypt = require('bcrypt');
+
 require('dotenv').config({ path: 'gym/.env' }); 
 
 /**
@@ -22,3 +24,5 @@ db.connect(err => {
   });
 
   module.exports=db;
+
+module.exports=db;
