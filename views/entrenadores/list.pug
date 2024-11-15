@@ -3,7 +3,7 @@ extends ../templates/layout
 
 block content
   h1 Lista de Entrenadores
-  table
+  table(border = 1)
     thead
       tr
         th Nombre
@@ -23,5 +23,5 @@ block content
           td
             a(href=`/entrenadores/edit/${entrenador.entrenador_id}`) Editar
             |
-            a(href=`/entrenadores/delete/${entrenador.entrenador_id}`) Eliminar
+            a(href=`/entrenadores/del/${entrenador.entrenador_id}`) Eliminar
   a(href="/entrenadores/add") Agregar Nuevo Entrenador
