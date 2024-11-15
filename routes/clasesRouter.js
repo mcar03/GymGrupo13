@@ -23,8 +23,4 @@ router.get('/del/:id', claseController.mostrarFormularioEliminar);
 // Ruta para eliminar una clase
 router.post('/del/:id', claseController.eliminarClase);
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
