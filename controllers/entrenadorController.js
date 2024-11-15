@@ -10,13 +10,21 @@ exports.listarEntrenadores = (req, res) => {
       console.error('Error al obtener los entrenadores:', err);
       return res.status(500).send('Error al obtener los entrenadores');
     }
+<<<<<<< HEAD
     res.render('listEntrenadores', { entrenadores: resultados });
+=======
+    res.render('entrenadores/list', { entrenadores: resultados });
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
   });
 };
 
 // Mostrar el formulario para agregar un nuevo entrenador
 exports.mostrarFormularioAgregar = (req, res) => {
+<<<<<<< HEAD
   res.render('addEntrenador');
+=======
+  res.render('entrenadores/add');
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
 };
 
 // Agregar un nuevo entrenador
@@ -26,7 +34,11 @@ exports.agregarEntrenador = (req, res) => {
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+<<<<<<< HEAD
     return res.render('addEntrenador', { errors: errors.array() });
+=======
+    return res.render('entrenadores/add', { errors: errors.array() });
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
   }
 
   const query = `
@@ -58,7 +70,11 @@ exports.mostrarFormularioEditar = (req, res) => {
       return res.status(404).send('Entrenador no encontrado');
     }
 
+<<<<<<< HEAD
     res.render('editEntrenador', { entrenador: entrenadorResults[0] });
+=======
+    res.render('entrenadores/edit', { entrenador: entrenadorResults[0] });
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
   });
 };
 
@@ -70,7 +86,11 @@ exports.editarEntrenador = (req, res) => {
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+<<<<<<< HEAD
     return res.render('editEntrenador', { errors: errors.array(), entrenador: req.body });
+=======
+    return res.render('entrenadores/edit', { errors: errors.array(), entrenador: req.body });
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
   }
 
   const query = `
@@ -102,7 +122,11 @@ exports.mostrarFormularioEliminar = (req, res) => {
     if (results.length === 0) {
       return res.status(404).send('Entrenador no encontrado');
     }
+<<<<<<< HEAD
     res.render('delEntrenador', { entrenador: results[0] });
+=======
+    res.render('entrenadores/del', { entrenador: results[0] });
+>>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
   });
 };
 
