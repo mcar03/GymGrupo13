@@ -29,10 +29,12 @@ exports.clienteAdd = (req, res) => {
 exports.clienteDelFormulario = (req, res) => {
   const { id } = req.params;
   console.log(id)
+  const parsedId = parseInt(id, 10);
+  console.log(parsedId)
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
   else
     db.query(
-      'SELECT * FROM clientes WHERE id=?',
+      'SELECT * FROM clientes WHERE cliente_id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR al INTENTAR BORRAR EL CLIENTE');
@@ -55,7 +57,7 @@ exports.clienteDel = (req, res) => {
     res.send('ERROR BORRANDO');
   } else {
     db.query(
-      'DELETE FROM clientes WHERE id=?',
+      'DELETE FROM clientes WHERE cliente_id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR BORRANDO CLIENTE' + req.body);
@@ -71,7 +73,7 @@ exports.clienteEditFormulario = (req, res) => {
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
   else
     db.query(
-      'SELECT * FROM clientes WHERE id=?',
+      'SELECT * FROM clientes WHERE cliente_id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE');
@@ -94,7 +96,7 @@ exports.clienteEdit = (req, res) => {
     res.send('ERROR ACTUALIZANDO');
   } else {
     db.query(
-      'UPDATE `clientes` SET `nombre` = ?, `apellidos` = ?, `telefono` = ?, `email` = ?, `direccion` = ?, `fecha_nacimiento` = ? WHERE `id` = ?',
+      'UPDATE `clientes` SET `nombre` = ?, `apellidos` = ?, `telefono` = ?, `email` = ?, `direccion` = ?, `fecha_nacimiento` = ? WHERE `cliente_id` = ?',
       [nombre, apellidos, telefono, email, direccion, fecha_nacimiento, id],
       (error, respuesta) => {
         if (error) {
