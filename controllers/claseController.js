@@ -60,7 +60,7 @@ exports.mostrarFormularioEditar = (req, res) => {
   const { id } = req.params;
 
   // Obtener la clase por su ID
-  db.query('SELECT * FROM clases WHERE clase_id = ?', [id], (err, claseResults) => {
+  db.query('SELECT * FROM clases WHERE clase_id = ?', [clase_id], (err, claseResults) => {
     if (err) {
       console.error('Error al obtener la clase para editar:', err);
       return res.status(500).send('Error al obtener la clase');
@@ -84,7 +84,7 @@ exports.mostrarFormularioEditar = (req, res) => {
 
 // Editar una clase
 exports.editarClase = (req, res) => {
-  const { id } = req.params;
+  const { clase_id } = req.params;
   const { nombre, descripcion, capacidad, duracion_minutos, entrenador_id } = req.body;
 
   // Validar los datos del formulario
@@ -98,7 +98,7 @@ exports.editarClase = (req, res) => {
     SET nombre = ?, descripcion = ?, capacidad = ?, duracion_minutos = ?, entrenador_id = ? 
     WHERE clase_id = ?
   `;
-  db.query(query, [nombre, descripcion, capacidad, duracion_minutos, entrenador_id, id], (err) => {
+  db.query(query, [nombre, descripcion, capacidad, duracion_minutos, entrenador_id, clase_id], (err) => {
     if (err) {
       console.error('Error al actualizar la clase:', err);
       return res.status(500).send('Error al actualizar la clase');
@@ -109,9 +109,9 @@ exports.editarClase = (req, res) => {
 
 // Mostrar el formulario para eliminar una clase
 exports.mostrarFormularioEliminar = (req, res) => {
-  const { id } = req.params;
+  const { clase_id } = req.params;
 
-  db.query('SELECT * FROM clases WHERE clase_id = ?', [id], (err, results) => {
+  db.query('SELECT * FROM clases WHERE clase_id = ?', [clase_id], (err, results) => {
     if (err) {
       console.error('Error al obtener la clase para eliminar:', err);
       return res.status(500).send('Error al obtener la clase');
@@ -126,9 +126,9 @@ exports.mostrarFormularioEliminar = (req, res) => {
 
 // Eliminar una clase
 exports.eliminarClase = (req, res) => {
-  const { id } = req.params;
+  const { clase_id } = req.params;
 
-  db.query('DELETE FROM clases WHERE clase_id = ?', [id], (err) => {
+  db.query('DELETE FROM clases WHERE clase_id = ?', [clase_id], (err) => {
     if (err) {
       console.error('Error al eliminar la clase:', err);
       return res.status(500).send('Error al eliminar la clase');
