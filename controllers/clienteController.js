@@ -54,10 +54,11 @@ exports.clienteAdd = (req, res) => {
 // Formulario para eliminar un cliente
 exports.clienteDelFormulario = (req, res) => {
   const { id } = req.params;
+  console.log(id)
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
   else
     db.query(
-      'SELECT * FROM clientes WHERE cliente_id=?',
+      'SELECT * FROM clientes WHERE id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR al INTENTAR BORRAR EL CLIENTE');
@@ -81,7 +82,7 @@ exports.clienteDel = (req, res) => {
     res.send('ERROR BORRANDO');
   } else {
     db.query(
-      'DELETE FROM clientes WHERE cliente_id=?',
+      'DELETE FROM clientes WHERE id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR BORRANDO CLIENTE' + req.body);
@@ -94,10 +95,11 @@ exports.clienteDel = (req, res) => {
 // Formulario para editar un cliente
 exports.clienteEditFormulario = (req, res) => {
   const { id } = req.params;
+  console.log(id)
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
   else
     db.query(
-      'SELECT * FROM clientes WHERE cliente_id=?',
+      'SELECT * FROM clientes WHERE id=?',
       id,
       (error, respuesta) => {
         if (error) res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE');
@@ -121,7 +123,7 @@ exports.clienteEdit = (req, res) => {
     res.send('ERROR ACTUALIZANDO');
   } else {
     db.query(
-      'UPDATE `clientes` SET `nombre` = ?, `apellidos` = ?, `telefono` = ?, `email` = ?, `direccion` = ?, `fecha_nacimiento` = ? WHERE `cliente_id` = ?',
+      'UPDATE `clientes` SET `nombre` = ?, `apellidos` = ?, `telefono` = ?, `email` = ?, `direccion` = ?, `fecha_nacimiento` = ? WHERE `id` = ?',
       [nombre, apellidos, telefono, email, direccion, fecha_nacimiento, id],
       (error, respuesta) => {
         if (error) {
