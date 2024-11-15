@@ -3,6 +3,19 @@ extends ../templates/layout
 block content
     div 
         h3 Listado de clientes
+
+        // Maestro de tipos de membresía
+        div
+            h4 Tipos de Membresías
+            ul
+                each membresia in membresias
+                    li
+                        a(
+                            href=`/clientes/membresia/${membresia.membresia_id}`, 
+                            class=selectedMembresia == membresia.membresia_id ? 'selected' : ''
+                        )= membresia.tipo
+
+        // Tabla de detalles de clientes
         table(border=1)
             thead 
                 tr
@@ -19,17 +32,24 @@ block content
             tbody 
                 each cliente in clientes
                     tr 
-                        td=cliente.cliente_id
-                        td=cliente.nombre
-                        td=cliente.apellidos
-                        td=cliente.telefono
-                        td=cliente.email
-                        td=cliente.direccion
-                        td=cliente.fecha_nacimiento
-                        td=cliente.fecha_registro
+                        td= cliente.cliente_id
+                        td= cliente.nombre
+                        td= cliente.apellidos
+                        td= cliente.telefono
+                        td= cliente.email
+                        td= cliente.direccion
+                        td= cliente.fecha_nacimiento
+                        td= cliente.fecha_registro
                         td 
                             a(href=`/clientes/del/${cliente.cliente_id}`) Borrar
                         td 
                             a(href=`/clientes/edit/${cliente.cliente_id}`) Editar
         p 
             a(href="/clientes/add") Añadir un cliente nuevo
+
+    // CSS para resaltar la membresía seleccionada
+    style.
+        .selected {
+            font-weight: bold;
+            color: blue;
+        }

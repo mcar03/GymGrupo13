@@ -1,19 +1,44 @@
 const db = require('../db');
 
+// Listado de clientes con membresías para el maestro-detalle
 exports.clientes = (req, res) => {
-  db.query(
-    'SELECT * FROM `clientes`',
-    (err, response) => {
-      if (err) res.send('ERROR al hacer la consulta');
-      else res.render('clientes/list', { clientes: response });
-    }
-  );
+  db.query('SELECT * FROM `clientes`', (err, clientes) => {
+    if (err) return res.send('ERROR al hacer la consulta de clientes');
+
+    db.query('SELECT * FROM `membresias`', (err, membresias) => {
+      if (err) return res.send('ERROR al hacer la consulta de membresías');
+      
+      res.render('clientes/list', { clientes, membresias });
+    });
+  });
 };
 
+// Listado filtrado de clientes por tipo de membresía
+exports.clientesPorMembresia = (req, res) => {
+  const membresiaId = req.params.membresia_id;
+
+  const query = `
+    SELECT clientes.* FROM clientes
+    JOIN inscripciones_membresias ON clientes.cliente_id = inscripciones_membresias.cliente_id
+    WHERE inscripciones_membresias.membresia_id = ?
+  `;
+  db.query(query, [membresiaId], (err, clientes) => {
+    if (err) return res.send('ERROR al hacer la consulta filtrada de clientes');
+
+    db.query('SELECT * FROM `membresias`', (err, membresias) => {
+      if (err) return res.send('ERROR al hacer la consulta de membresías');
+      
+      res.render('clientes/list', { clientes, membresias, selectedMembresia: membresiaId });
+    });
+  });
+};
+
+// Formulario para agregar un nuevo cliente
 exports.clienteAddFormulario = (req, res) => {
   res.render('clientes/add');
 };
 
+// Agregar un nuevo cliente
 exports.clienteAdd = (req, res) => {
   const { nombre, apellidos, telefono, email, direccion, fecha_nacimiento } = req.body;
   db.query(
@@ -26,6 +51,7 @@ exports.clienteAdd = (req, res) => {
   );
 };
 
+// Formulario para eliminar un cliente
 exports.clienteDelFormulario = (req, res) => {
   const { id } = req.params;
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
@@ -46,6 +72,7 @@ exports.clienteDelFormulario = (req, res) => {
     );
 };
 
+// Eliminar un cliente
 exports.clienteDel = (req, res) => {
   const { id, nombre, apellidos } = req.body;
   const paramId = req.params['id'];
@@ -64,6 +91,7 @@ exports.clienteDel = (req, res) => {
   }
 };
 
+// Formulario para editar un cliente
 exports.clienteEditFormulario = (req, res) => {
   const { id } = req.params;
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
@@ -84,6 +112,7 @@ exports.clienteEditFormulario = (req, res) => {
     );
 };
 
+// Actualizar un cliente
 exports.clienteEdit = (req, res) => {
   const { id, nombre, apellidos, telefono, email, direccion, fecha_nacimiento } = req.body;
   const paramId = req.params['id'];
