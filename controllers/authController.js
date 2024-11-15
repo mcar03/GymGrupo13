@@ -1,62 +1,80 @@
+// Solo estas línea debería estar presente
 const bcrypt = require('bcrypt');
 const db = require('../db');
 
-
-exports.registerForm = (req, res) =>{
-    res.render('register');
+// Mostrar el formulario de login
+exports.mostrarLogin = (req, res) => {
+    res.render('auth/login');  // Asegúrate de tener esta vista
 };
 
-exports.register = (req, res) =>{
-    const datosUsuario = req.body;
-    datosUsuario.rol='cliente'
-    datosUsuario.password= bcrypt.hashSync(datosUsuario.password, 10);
-    try {
-            // guardamos el usuario en la BBDD SIN ACTIVAR
-        db.query(
-            'INSERT INTO users (username, password, enabled) VALUES (?,?,?)',
-            [datosUsuario.username, datosUsuario.password, 0],
-            (error, respuesta) => {
-                if (error) res.send('ERROR INSERTANDO usuario' + req.body)
-                else res.render('mensaje', {tituloPagina:'Registro usuarios', mensajePagina: 'Usuario registrado'});
+
+// Función para procesar el login
+exports.login = (req, res) => {
+    const { nombre, password } = req.body;
+
+    // Buscamos al usuario por su nombre
+    const query = 'SELECT * FROM usuarios WHERE nombre = ?';
+    db.query(query, [nombre], (err, results) => {
+        if (err) {
+            return res.send('Error en la base de datos');
         }
-      );                
-    } catch (error) {
-        res.render('mensaje', {tituloPagina:'ERROR', mensajePagina: 'Error ' + error});
-    }   
-};
 
-exports.loginForm = (req, res) =>{
-    res.render('login');
-};
-
-exports.login = (req, res)=>{
-    const {username, password} = req.body;
-
-    db.query(
-        'SELECT * from users WHERE username=?',
-        [username],
-        (error, rsUsuario) => {
-            if (error) {
-                res.render('mensaje', {tituloPagina:'LOGIN', mensajePagina: 'Usuario no encontrado'});
-            } else {
-                const usuario = rsUsuario[0];
-                if (usuario) {
-                    if (usuario.enabled==1 && bcrypt.compareSync(password, usuario.password)){
-                        req.session.user = usuario.username;
-                        res.redirect('/');
-                    } else {                       
-                        res.render('mensaje', {tituloPagina:'LOGIN', mensajePagina: 'Usuario desactivado'});
-                    }
-                } else {
-                    res.render('mensaje', {tituloPagina:'LOGIN', mensajePagina: 'Usuario no encontrado o credenciales inválidas'});
+        if (results.length > 0) {
+            const user = results[0];
+            
+            // Comparamos la contraseña ingresada con la almacenada
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if (err) {
+                    return res.send('Error en la comparación de contraseñas');
                 }
-            }
+                if (isMatch) {
+                    req.session.user = user;  // Almacenamos el usuario en la sesión
+                    return res.redirect('/');  // Redirigir al inicio
+                } else {
+                    return res.send('Credenciales incorrectas');
+                }
+            });
+        } else {
+            return res.send('No se encontró el usuario');
         }
-    )    
+    });
 };
 
-exports.logout = (req, res)=>{
-    req.session.destroy();
-    res.redirect('/auth/login');
+
+// Mostrar el formulario de registro
+exports.mostrarRegistro = (req, res) => {
+    res.render('auth/register');  // Asegúrate de tener esta vista
 };
 
+
+
+// Función para registrar un nuevo usuario
+exports.registro = (req, res) => {
+    const { nombre, password } = req.body;
+
+    // Hash de la contraseña
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) return res.send('Error al cifrar la contraseña');
+
+        // Insertamos el nuevo usuario en la base de datos
+        const query = 'INSERT INTO usuarios (nombre, password) VALUES (?, ?)';
+        db.query(query, [nombre, hashedPassword], (err, result) => {
+            if (err) {
+                return res.send('Error en la base de datos');
+            }
+            // Redirigimos al login después de registrar al usuario
+            res.redirect('/auth/login');
+        });
+    });
+};
+
+
+// Cerrar sesión
+exports.logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.send('Error al cerrar sesión');
+        }
+        res.redirect('/auth/login');  // Redirigir al login después de cerrar sesión
+    });
+};
