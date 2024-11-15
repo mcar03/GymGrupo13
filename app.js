@@ -14,11 +14,7 @@ const entrenadorRouter = require('./routes/entrenadorRouter')
 const membresiasRouter = require('./routes/membresiasRouter')
 const inscripcionesMembresiasRouter = require('./routes/inscripcionesMembresiasRouter')
 
-<<<<<<< HEAD
-require('dotenv').config({ path: './gesaca/.env' });
-=======
 require('dotenv').config({ path: './gym/.env' });
->>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
 
 /**
  * Crea el servidor Web
@@ -40,15 +36,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 app.use('/clases', clasesRouter);
 app.use('/clientes', clientesRouter);
-<<<<<<< HEAD
-app.use('/entrenador', entrenadorRouter);
-app.use('/membresias', membresiasRouter);
-app.use('/inscripciones', inscripcionesMembresiasRouter);
-=======
 app.use('/entrenadores', entrenadorRouter);
 app.use('/membresias', membresiasRouter);
 app.use('/inscripciones_membresias', inscripcionesMembresiasRouter);
->>>>>>> 924044bcb5f8bdc71911025a317013171ab8355e
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -63,4 +53,3 @@ app.listen(
     port, () => {
         console.log(`Servidor iniciado en http://localhost:${port}`);
     });
-
