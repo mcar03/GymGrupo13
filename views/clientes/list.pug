@@ -4,16 +4,16 @@ block content
     div 
         h3 Listado de clientes
 
-        // Maestro de tipos de membresía
+        // Menú desplegable de tipos de membresía
         div
             h4 Tipos de Membresías
-            ul
+            select(onchange="location = this.value") // Cambiar URL al seleccionar
+                option(value="/clientes", selected=selectedMembresia == null) Mostrar Todos
                 each membresia in membresias
-                    li
-                        a(
-                            href=`/clientes/membresia/${membresia.membresia_id}`, 
-                            class=selectedMembresia == membresia.membresia_id ? 'selected' : ''
-                        )= membresia.tipo
+                    option(
+                        value=`/clientes/membresia/${membresia.membresia_id}`,
+                        selected=selectedMembresia == membresia.membresia_id
+                    )= membresia.tipo
 
         // Tabla de detalles de clientes
         table(border=1)
@@ -46,10 +46,3 @@ block content
                             a(href=`/clientes/edit/${cliente.cliente_id}`) Editar
         p 
             a(href="/clientes/add") Añadir un cliente nuevo
-
-    // CSS para resaltar la membresía seleccionada
-    style.
-        .selected {
-            font-weight: bold;
-            color: blue;
-        }
