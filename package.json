@@ -15,7 +15,7 @@
     "express-session": "^1.18.1",
     "express-validator": "^7.2.0",
     "gestion-academica": "file:",
-    "mysql2": "^3.11.3",
+    "mysql2": "^3.11.4",
     "pug": "^3.0.3"
   }
 }
