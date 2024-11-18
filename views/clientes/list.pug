@@ -3,6 +3,19 @@ extends ../templates/layout
 block content
     div 
         h3 Listado de clientes
+
+        // Menú desplegable de tipos de membresía
+        div
+            h4 Tipos de Membresías
+            select(onchange="location = this.value") // Cambiar URL al seleccionar
+                option(value="/clientes", selected=selectedMembresia == null) Mostrar Todos
+                each membresia in membresias
+                    option(
+                        value=`/clientes/membresia/${membresia.membresia_id}`,
+                        selected=selectedMembresia == membresia.membresia_id
+                    )= membresia.tipo
+
+        // Tabla de detalles de clientes
         table(border=1)
             thead 
                 tr
@@ -19,14 +32,14 @@ block content
             tbody 
                 each cliente in clientes
                     tr 
-                        td=cliente.cliente_id
-                        td=cliente.nombre
-                        td=cliente.apellidos
-                        td=cliente.telefono
-                        td=cliente.email
-                        td=cliente.direccion
-                        td=cliente.fecha_nacimiento
-                        td=cliente.fecha_registro
+                        td= cliente.cliente_id
+                        td= cliente.nombre
+                        td= cliente.apellidos
+                        td= cliente.telefono
+                        td= cliente.email
+                        td= cliente.direccion
+                        td= cliente.fecha_nacimiento
+                        td= cliente.fecha_registro
                         td 
                             a(href=`/clientes/del/${cliente.cliente_id}`) Borrar
                         td 

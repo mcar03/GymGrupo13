@@ -5,6 +5,9 @@ const clienteController = require('../controllers/clienteController');
 // Ruta para obtener todos los clientes
 router.get('/', clienteController.clientes);
 
+// Ruta para filtrar clientes por tipo de membresía
+router.get('/membresia/:membresia_id', clienteController.clientesPorMembresia);
+
 // Ruta para mostrar el formulario de agregar un nuevo cliente
 router.get('/add', clienteController.clienteAddFormulario);
 

@@ -1,0 +1,21 @@
+extends ../templates/layout
+
+block content
+  h3 Iniciar sesión
+
+  // Formulario de inicio de sesión
+  form(action="/auth/login", method="POST")
+    div
+      label(for="nombre") Nombre:
+      input(type="text", id="nombre", name="nombre", required=true)
+
+    div
+      label(for="password") Contraseña:
+      input(type="password", id="password", name="password", required=true)
+
+    div
+      button(type="submit") Iniciar sesión
+
+  // Enlace para registrarse
+  p
+    a(href="/auth/register") No tienes cuenta? Regístrate aquí
