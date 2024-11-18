@@ -1,5 +1,5 @@
+//- views/clases/list.pug
 extends ../templates/layout
-
 
 block content
   h1 Lista de Clases
@@ -25,5 +25,5 @@ block content
           td
             a(href=`/clases/edit/${clase.clase_id}`) Editar
             |
-            a(href=`/clases/delete/${clase.clase_id}`) Eliminar
+            a(href=`/clases/del/${clase.clase_id}`) Eliminar
   a(href="/clases/add") Agregar Nueva Clase

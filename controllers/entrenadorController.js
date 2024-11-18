@@ -1,7 +1,5 @@
-const db = require('../db'); // Importamos la conexión a la base de datos
-const { validationResult } = require('express-validator');
+const db = require('../db');
 
-// Listar todos los entrenadores
 exports.listarEntrenadores = (req, res) => {
   const query = 'SELECT * FROM entrenadores';
   
@@ -14,20 +12,12 @@ exports.listarEntrenadores = (req, res) => {
   });
 };
 
-// Mostrar el formulario para agregar un nuevo entrenador
 exports.mostrarFormularioAgregar = (req, res) => {
   res.render('entrenadores/add');
 };
 
-// Agregar un nuevo entrenador
 exports.agregarEntrenador = (req, res) => {
   const { nombre, apellido, especialidad, salario } = req.body;
-
-  // Validar los datos del formulario
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.render('entrenadores/add', { errors: errors.array() });
-  }
 
   const query = `
     INSERT INTO entrenadores (nombre, apellido, especialidad, salario)
@@ -43,35 +33,25 @@ exports.agregarEntrenador = (req, res) => {
   });
 };
 
-// Mostrar el formulario para editar un entrenador
 exports.mostrarFormularioEditar = (req, res) => {
   const { id } = req.params;
 
-  // Obtener el entrenador por su ID
-  db.query('SELECT * FROM entrenadores WHERE entrenador_id = ?', [id], (err, entrenadorResults) => {
+  db.query('SELECT * FROM entrenadores WHERE entrenador_id = ?', [id], (err, results) => {
     if (err) {
       console.error('Error al obtener el entrenador para editar:', err);
       return res.status(500).send('Error al obtener el entrenador');
     }
 
-    if (entrenadorResults.length === 0) {
+    if (results.length === 0) {
       return res.status(404).send('Entrenador no encontrado');
     }
-
-    res.render('entrenadores/edit', { entrenador: entrenadorResults[0] });
+    res.render('entrenadores/edit', { entrenador: results[0] });
   });
 };
 
-// Editar un entrenador
 exports.editarEntrenador = (req, res) => {
   const { id } = req.params;
   const { nombre, apellido, especialidad, salario } = req.body;
-
-  // Validar los datos del formulario
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.render('entrenadores/edit', { errors: errors.array(), entrenador: req.body });
-  }
 
   const query = `
     UPDATE entrenadores
@@ -88,11 +68,9 @@ exports.editarEntrenador = (req, res) => {
   });
 };
 
-// Mostrar el formulario de eliminación de un entrenador
 exports.mostrarFormularioEliminar = (req, res) => {
   const { id } = req.params;
 
-  // Obtener el entrenador por su ID para confirmación
   db.query('SELECT * FROM entrenadores WHERE entrenador_id = ?', [id], (err, results) => {
     if (err) {
       console.error('Error al obtener el entrenador para eliminar:', err);
@@ -106,7 +84,6 @@ exports.mostrarFormularioEliminar = (req, res) => {
   });
 };
 
-// Eliminar un entrenador
 exports.eliminarEntrenador = (req, res) => {
   const { id } = req.params;
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const claseController = require('../controllers/claseController');
+const claseController = require('../controllers/clasesController');
 
 // Ruta para listar todas las clases con información de los entrenadores
 router.get('/', claseController.listarClases);
