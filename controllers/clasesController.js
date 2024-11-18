@@ -17,8 +17,7 @@ exports.listarClases = (req, res) => {
       console.error('Error al obtener las clases:', err);
       return res.status(500).send('Error al obtener las clases');
     }
-
-    res.render('clases/list', { clases: resultados });
+    res.render('listClases', { clases: resultados });
   });
 };
 
@@ -29,7 +28,7 @@ exports.mostrarFormularioAgregar = (req, res) => {
       console.error('Error al obtener los entrenadores:', err);
       return res.status(500).send('Error al obtener los entrenadores');
     }
-    res.render('clases/add', { entrenadores: entrenadores });
+    res.render('addClase', { entrenadores: entrenadores });
   });
 };
 
@@ -40,7 +39,7 @@ exports.agregarClase = (req, res) => {
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.render('clases/add', { errors: errors.array(), entrenadores: req.entrenadores });
+    return res.render('addClase', { errors: errors.array(), entrenadores: req.entrenadores });
   }
 
   const query = `
@@ -61,7 +60,7 @@ exports.mostrarFormularioEditar = (req, res) => {
   const { id } = req.params;
 
   // Obtener la clase por su ID
-  db.query('SELECT * FROM clases WHERE clase_id = ?', [clase_id], (err, claseResults) => {
+  db.query('SELECT * FROM clases WHERE clase_id = ?', [id], (err, claseResults) => {
     if (err) {
       console.error('Error al obtener la clase para editar:', err);
       return res.status(500).send('Error al obtener la clase');
@@ -78,22 +77,20 @@ exports.mostrarFormularioEditar = (req, res) => {
         return res.status(500).send('Error al obtener los entrenadores');
       }
 
-      res.render('clases/edit', { clase: claseResults[0], entrenadores: entrenadores });
+      res.render('editClase', { clase: claseResults[0], entrenadores: entrenadores });
     });
   });
 };
 
 // Editar una clase
 exports.editarClase = (req, res) => {
-  const { clase_id } = req.params;
+  const { id } = req.params;
   const { nombre, descripcion, capacidad, duracion_minutos, entrenador_id } = req.body;
 
   // Validar los datos del formulario
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-
-    return res.render('clases/edit', { errors: errors.array(), clase: req.body, entrenadores: req.entrenadores });
-
+    return res.render('editClase', { errors: errors.array(), clase: req.body, entrenadores: req.entrenadores });
   }
 
   const query = `
@@ -101,7 +98,7 @@ exports.editarClase = (req, res) => {
     SET nombre = ?, descripcion = ?, capacidad = ?, duracion_minutos = ?, entrenador_id = ? 
     WHERE clase_id = ?
   `;
-  db.query(query, [nombre, descripcion, capacidad, duracion_minutos, entrenador_id, clase_id], (err) => {
+  db.query(query, [nombre, descripcion, capacidad, duracion_minutos, entrenador_id, id], (err) => {
     if (err) {
       console.error('Error al actualizar la clase:', err);
       return res.status(500).send('Error al actualizar la clase');
@@ -112,9 +109,9 @@ exports.editarClase = (req, res) => {
 
 // Mostrar el formulario para eliminar una clase
 exports.mostrarFormularioEliminar = (req, res) => {
-  const { clase_id } = req.params;
+  const { id } = req.params;
 
-  db.query('SELECT * FROM clases WHERE clase_id = ?', [clase_id], (err, results) => {
+  db.query('SELECT * FROM clases WHERE clase_id = ?', [id], (err, results) => {
     if (err) {
       console.error('Error al obtener la clase para eliminar:', err);
       return res.status(500).send('Error al obtener la clase');
@@ -123,15 +120,15 @@ exports.mostrarFormularioEliminar = (req, res) => {
     if (results.length === 0) {
       return res.status(404).send('Clase no encontrada');
     }
-    res.render('clases/del', { clase: results[0] });
+    res.render('delClase', { clase: results[0] });
   });
 };
 
 // Eliminar una clase
 exports.eliminarClase = (req, res) => {
-  const { clase_id } = req.params;
+  const { id } = req.params;
 
-  db.query('DELETE FROM clases WHERE clase_id = ?', [clase_id], (err) => {
+  db.query('DELETE FROM clases WHERE clase_id = ?', [id], (err) => {
     if (err) {
       console.error('Error al eliminar la clase:', err);
       return res.status(500).send('Error al eliminar la clase');
