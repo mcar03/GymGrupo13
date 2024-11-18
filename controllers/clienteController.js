@@ -69,7 +69,7 @@ exports.clienteDel = (req, res) => {
 
 exports.clienteEditFormulario = (req, res) => {
   const { id } = req.params;
-  console.log(id)
+  //console.log(id)
   if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
   else
     db.query(
@@ -91,6 +91,7 @@ exports.clienteEditFormulario = (req, res) => {
 exports.clienteEdit = (req, res) => {
   const { id, nombre, apellidos, telefono, email, direccion, fecha_nacimiento } = req.body;
   const paramId = req.params['id'];
+  console.log(id)
 
   if (isNaN(id) || isNaN(paramId) || id !== paramId) {
     res.send('ERROR ACTUALIZANDO');

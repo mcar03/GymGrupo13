@@ -113,7 +113,7 @@ exports.editarClase = (req, res) => {
 // Mostrar el formulario para eliminar una clase
 exports.mostrarFormularioEliminar = (req, res) => {
   const { clase_id } = req.params;
-
+  console.log(clase_id)
   db.query('SELECT * FROM clases WHERE clase_id = ?', [clase_id], (err, results) => {
     if (err) {
       console.error('Error al obtener la clase para eliminar:', err);

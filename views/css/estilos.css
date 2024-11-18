@@ -1,7 +1,23 @@
-h1,h2,h3 {
-    color:red
+/* styles.css */
+
+/* Cambiar el color de fondo del cuerpo */
+body {
+    background-color: #f8f9fa; /* Gris claro */
 }
 
-table {
-    border: 1px solid black;
+/* Personalizar el encabezado */
+h1 {
+    color: #343a40; /* Gris oscuro */
+    font-weight: bold;
+}
+
+/* Botones personalizados */
+.btn-primary {
+    background-color: #007bff; /* Azul Bootstrap */
+    border: 2px solid #0056b3; /* Bordes más oscuros */
+}
+
+/* Agregar un borde redondeado a las cajas de texto */
+input.form-control {
+    border-radius: 15px;
 }
