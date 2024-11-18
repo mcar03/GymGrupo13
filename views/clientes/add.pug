@@ -2,24 +2,23 @@ extends ../templates/layout
 
 block content 
     h3 Añadir un nuevo cliente
-        div 
-            form(action="/clientes/add", method="post") 
-                label(for="nombre") Nombre:
-                input(type="text", name="nombre")
-                br
-                label(for="apellidos") Apellidos:
-                input(type="text", name="apellidos")
-                br
-                label(for="telefono") Teléfono:
-                input(type="text", name="telefono")
-                br
-                label(for="email") Email:
-                input(type="email", name="email")
-                br
-                label(for="direccion") Dirección:
-                input(type="text", name="direccion")
-                br
-                label(for="fecha_nacimiento") Fecha de nacimiento:
-                input(type="date", name="fecha_nacimiento")
-                br
-                input(type="submit", value="Enviar")
+    form(action="/clientes/add", method="post", class="needs-validation", novalidate)
+        .mb-3
+            label(for="nombre", class="form-label") Nombre:
+            input(type="text", name="nombre", class="form-control", required=true)
+        .mb-3
+            label(for="apellidos", class="form-label") Apellidos:
+            input(type="text", name="apellidos", class="form-control", required=true)
+        .mb-3
+            label(for="telefono", class="form-label") Teléfono:
+            input(type="text", name="telefono", class="form-control", required=true)
+        .mb-3
+            label(for="email", class="form-label") Email:
+            input(type="email", name="email", class="form-control", required=true)
+        .mb-3
+            label(for="direccion", class="form-label") Dirección:
+            input(type="text", name="direccion", class="form-control", required=true)
+        .mb-3
+            label(for="fecha_nacimiento", class="form-label") Fecha de nacimiento:
+            input(type="date", name="fecha_nacimiento", class="form-control", required=true)
+        button(type="submit", class="btn btn-primary") Enviar

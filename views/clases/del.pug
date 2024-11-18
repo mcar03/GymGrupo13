@@ -4,5 +4,5 @@ block content
   h1 Eliminar Clase
   p ¿Estás seguro de que deseas eliminar la clase: #{clase.nombre}?
   form(action=`/clases/del/${clase.id}`, method="POST")
-    button(type="submit") Sí, Eliminar
-    a(href="/clases") No, Volver a la lista de clases
+    button(type="submit", class="btn btn-danger") Sí, Eliminar
+    a(href="/clases", class="btn btn-secondary") No, Volver a la lista de clases

@@ -3,24 +3,24 @@ extends ../templates/layout
 
 block content
   h1 Editar Clase
-  form(action=`/clases/edit/${clase.clase_id}`, method="POST")
-    div
-      label(for="nombre") Nombre de la Clase
-      input(type="text", name="nombre", id="nombre", value=clase.nombre, required=true)
-    div
-      label(for="descripcion") Descripción
-      textarea(name="descripcion", id="descripcion")= clase.descripcion
-    div
-      label(for="capacidad") Capacidad
-      input(type="number", name="capacidad", id="capacidad", value=clase.capacidad, required=true)
-    div
-      label(for="duracion_minutos") Duración (en minutos)
-      input(type="number", name="duracion_minutos", id="duracion_minutos", value=clase.duracion_minutos, required=true)
-    div
-      label(for="entrenador_id") Entrenador
-      select(name="entrenador_id", id="entrenador_id", required=true)
+  form(action=`/clases/edit/${clase.clase_id}`, method="POST", class="needs-validation", novalidate)
+    .mb-3
+      label(for="nombre", class="form-label") Nombre de la Clase
+      input(type="text", name="nombre", id="nombre", value=clase.nombre, class="form-control", required=true)
+    .mb-3
+      label(for="descripcion", class="form-label") Descripción
+      textarea(name="descripcion", id="descripcion", class="form-control")= clase.descripcion
+    .mb-3
+      label(for="capacidad", class="form-label") Capacidad
+      input(type="number", name="capacidad", id="capacidad", value=clase.capacidad, class="form-control", required=true)
+    .mb-3
+      label(for="duracion_minutos", class="form-label") Duración (en minutos)
+      input(type="number", name="duracion_minutos", id="duracion_minutos", value=clase.duracion_minutos, class="form-control", required=true)
+    .mb-3
+      label(for="entrenador_id", class="form-label") Entrenador
+      select(name="entrenador_id", id="entrenador_id", class="form-select", required=true)
         each entrenador in entrenadores
-          option(value=entrenador.entrenador_id, selected=entrenador.entrenador_id === clase.entrenador_id)= entrenador.nombre + ' ' + entrenador.apellido
-    div
-      button(type="submit") Guardar Cambios
-    a(href="/clases") Volver a la lista de clases
+          option(value=entrenador.entrenador_id, selected=entrenador.entrenador_id == clase.entrenador_id)= entrenador.nombre + ' ' + entrenador.apellido
+    .mb-3
+      button(type="submit", class="btn btn-primary") Guardar
+    a(href="/clases", class="btn btn-secondary") Volver a la lista de clases

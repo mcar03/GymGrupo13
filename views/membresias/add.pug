@@ -2,19 +2,18 @@ extends ../templates/layout
 
 block content 
     h3 Añadir una nueva membresía
-        div 
-            form(action="/membresias/add", method="post") 
-                label(for="tipo") Tipo:
-                input(type="text", name="tipo")
-                br
-                label(for="costo") Costo:
-                input(type="number", name="costo", step="0.01")
-                br
-                label(for="duracion_dias") Duración en días:
-                input(type="number", name="duracion_dias")
-                br
-                label(for="descripcion") Descripción:
-                textarea(name="descripcion")
-                br
-                input(type="submit", value="Enviar")
+    form(action="/membresias/add", method="post", class="needs-validation", novalidate)
+        .mb-3
+            label(for="tipo", class="form-label") Tipo:
+            input(type="text", name="tipo", class="form-control", required=true)
+        .mb-3
+            label(for="costo", class="form-label") Costo:
+            input(type="number", name="costo", step="0.01", class="form-control", required=true)
+        .mb-3
+            label(for="duracion_dias", class="form-label") Duración en días:
+            input(type="number", name="duracion_dias", class="form-control", required=true)
+        .mb-3
+            label(for="descripcion", class="form-label") Descripción:
+            textarea(name="descripcion", class="form-control")
+        button(type="submit", class="btn btn-primary") Enviar
 

@@ -1,7 +1,7 @@
-const db = require('../db'); // Importamos la conexión a la base de datos
 const { validationResult } = require('express-validator');
 
-// Listar todos los entrenadores
+const db = require('../db');
+
 exports.listarEntrenadores = (req, res) => {
   const query = 'SELECT * FROM entrenadores';
   
@@ -10,9 +10,11 @@ exports.listarEntrenadores = (req, res) => {
       console.error('Error al obtener los entrenadores:', err);
       return res.status(500).send('Error al obtener los entrenadores');
     }
+    // Asegúrate de que el nombre de la vista sea correcto
     res.render('entrenadores/list', { entrenadores: resultados });
   });
 };
+
 
 // Mostrar el formulario para agregar un nuevo entrenador
 exports.mostrarFormularioAgregar = (req, res) => {

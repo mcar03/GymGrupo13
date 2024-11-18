@@ -2,20 +2,19 @@ extends ../templates/layout
 
 block content 
     h3 Añadir una nueva inscripción a membresía
-        div 
-            form(action="/inscripciones_membresias/add", method="post") 
-                label(for="cliente_id") Cliente:
-                input(type="number", name="cliente_id") 
-                br
-                label(for="membresia_id") Membresía:
-                input(type="number", name="membresia_id")
-                br
-                label(for="fecha_fin") Fecha de fin:
-                input(type="date", name="fecha_fin")
-                br
-                label(for="estado") Estado:
-                select(name="estado")
-                    option(value="activa") Activa
-                    option(value="inactiva") Inactiva
-                br
-                input(type="submit", value="Enviar")
+    form(action="/inscripciones_membresias/add", method="post", class="needs-validation", novalidate)
+        .mb-3
+            label(for="cliente_id", class="form-label") Cliente:
+            input(type="number", name="cliente_id", class="form-control", required=true)
+        .mb-3
+            label(for="membresia_id", class="form-label") Membresía:
+            input(type="number", name="membresia_id", class="form-control", required=true)
+        .mb-3
+            label(for="fecha_fin", class="form-label") Fecha de fin:
+            input(type="date", name="fecha_fin", class="form-control", required=true)
+        .mb-3
+            label(for="estado", class="form-label") Estado:
+            select(name="estado", class="form-select", required=true)
+                option(value="activa") Activa
+                option(value="inactiva") Inactiva
+        button(type="submit", class="btn btn-primary") Enviar

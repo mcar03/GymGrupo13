@@ -1,32 +1,25 @@
 extends ../templates/layout
 
 block content
-    div 
-        h3 Listado de membresías
-        table(border=1)
-            thead 
-                tr
-                    th ID
-                    th Tipo
-                    th Costo
-                    th Duración (días)
-                    th Descripción
-                    th Fecha de Registro
-                    th Borrar
-                    th Editar
-            tbody 
-                each membresia in membresias
-                    tr 
-                        td=membresia.membresia_id
-                        td=membresia.tipo
-                        td=membresia.costo
-                        td=membresia.duracion_dias
-                        td=membresia.descripcion
-                        td=membresia.fecha_registro
-                        td 
-                            a(href=`/membresias/del/${membresia.membresia_id}`) Borrar
-                        td 
-                            a(href=`/membresias/edit/${membresia.membresia_id}`) Editar
-        p 
-            a(href="/membresias/add") Añadir una nueva membresía
-
+  h1 Lista de Membresías
+  table(class="table table-striped")
+    thead
+      tr
+        th ID
+        th Tipo
+        th Costo
+        th Duración (días)
+        th Descripción
+        th Acciones
+    tbody
+      each membresia in membresias
+        tr
+          td= membresia.membresia_id
+          td= membresia.tipo
+          td= membresia.costo
+          td= membresia.duracion_dias
+          td= membresia.descripcion
+          td
+            a(href=`/membresias/edit/${membresia.membresia_id}`, class="btn btn-warning btn-sm") Editar
+            a(href=`/membresias/del/${membresia.membresia_id}`, class="btn btn-danger btn-sm") Eliminar
+  a(href="/membresias/add", class="btn btn-success") Añadir Nueva Membresía

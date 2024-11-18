@@ -1,21 +1,22 @@
 h2 Gym13
-nav
-      ul
-        li
-          a(href="/") Inicio
-        //- if user
-        li
-          a(href="/clientes") Clientes
-        li 
-          a(href="/clases") Clases de Entrenamiento
-        li 
-          a(href="/entrenadores") Entrenadores
-        li 
-          a(href="/membresias") Menbresias
-        li 
-          a(href="/inscripciones_membresias") Inscripciones 
-        li
-          a(href="/logout") Cerrar sesión
-        //- else
-          li
-            a(href="/login") Iniciar Sesión
+nav(class="navbar navbar-expand-lg navbar-light bg-light")
+    div(class="container-fluid")
+        a(class="navbar-brand", href="#") Gym13
+        button(class="navbar-toggler", type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+            span(class="navbar-toggler-icon")
+        div(class="collapse navbar-collapse", id="navbarNav")
+            ul(class="navbar-nav")
+                li(class="nav-item")
+                    a(class="nav-link", href="/") Inicio
+                li(class="nav-item")
+                    a(class="nav-link", href="/clientes") Clientes
+                li(class="nav-item")
+                    a(class="nav-link", href="/clases") Clases de Entrenamiento
+                li(class="nav-item")
+                    a(class="nav-link", href="/entrenadores") Entrenadores
+                li(class="nav-item")
+                    a(class="nav-link", href="/membresias") Membresías
+                li(class="nav-item")
+                    a(class="nav-link", href="/inscripciones_membresias") Inscripciones 
+                li(class="nav-item")
+                    a(class="nav-link", href="/auth/logout") Cerrar sesión

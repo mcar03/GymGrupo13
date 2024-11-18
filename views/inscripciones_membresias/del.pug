@@ -2,22 +2,22 @@ extends ../templates/layout
 
 block content 
     h3 Borrar una inscripción a membresía
-        div 
-            form(action=`/inscripciones_membresias/del/${inscripcion.inscripcion_id}`, method="post") 
-                label(for="cliente_id") Cliente ID:
-                input(type="text", name="cliente_id", value=`${inscripcion.cliente_id}`, disabled)
-                br
-                label(for="membresia_id") Membresía ID:
-                input(type="text", name="membresia_id", value=`${inscripcion.membresia_id}`, disabled)
-                br
-                label(for="fecha_inicio") Fecha de inicio:
-                input(type="text", name="fecha_inicio", value=`${inscripcion.fecha_inicio}`, disabled)
-                br
-                label(for="fecha_fin") Fecha de fin:
-                input(type="text", name="fecha_fin", value=`${inscripcion.fecha_fin}`, disabled)
-                br
-                label(for="estado") Estado:
-                input(type="text", name="estado", value=`${inscripcion.estado}`, disabled)
-                br
-                input(type="hidden", name="inscripcion_id", value=`${inscripcion.inscripcion_id}`)
-                input(type="submit", value="Eliminar")
+    form(action=`/inscripciones_membresias/del/${inscripcion.inscripcion_id}`, method="post")
+        .mb-3
+            label(for="cliente_id", class="form-label") Cliente ID:
+            input(type="text", name="cliente_id", value=`${inscripcion.cliente_id}`, class="form-control", disabled)
+        .mb-3
+            label(for="membresia_id", class="form-label") Membresía ID:
+            input(type="text", name="membresia_id", value=`${inscripcion.membresia_id}`, class="form-control", disabled)
+        .mb-3
+            label(for="fecha_inicio", class="form-label") Fecha de inicio:
+            input(type="text", name="fecha_inicio", value=`${inscripcion.fecha_inicio}`, class="form-control", disabled)
+        .mb-3
+            label(for="fecha_fin", class="form-label") Fecha de fin:
+            input(type="text", name="fecha_fin", value=`${inscripcion.fecha_fin}`, class="form-control", disabled)
+        .mb-3
+            label(for="estado", class="form-label") Estado:
+            input(type="text", name="estado", value=`${inscripcion.estado}`, class="form-control", disabled)
+        input(type="hidden", name="inscripcion_id", value=`${inscripcion.inscripcion_id}`)
+        button(type="submit", class="btn btn-danger") Eliminar
+        a(href="/inscripciones_membresias", class="btn btn-secondary") Cancelar

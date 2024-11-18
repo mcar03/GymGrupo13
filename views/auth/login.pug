@@ -4,18 +4,15 @@ block content
   h3 Iniciar sesión
 
   // Formulario de inicio de sesión
-  form(action="/auth/login", method="POST")
-    div
-      label(for="nombre") Nombre:
-      input(type="text", id="nombre", name="nombre", required=true)
-
-    div
-      label(for="password") Contraseña:
-      input(type="password", id="password", name="password", required=true)
-
-    div
-      button(type="submit") Iniciar sesión
+  form(action="/auth/login", method="POST", class="needs-validation", novalidate)
+    .mb-3
+      label(for="nombre", class="form-label") Nombre:
+      input(type="text", id="nombre", name="nombre", class="form-control", required=true)
+    .mb-3
+      label(for="password", class="form-label") Contraseña:
+      input(type="password", id="password", name="password", class="form-control", required=true)
+    button(type="submit", class="btn btn-primary") Iniciar sesión
 
   // Enlace para registrarse
   p
-    a(href="/auth/register") No tienes cuenta? Regístrate aquí
+    a(href="/auth/register", class="btn btn-link") No tienes cuenta? Regístrate aquí

@@ -1,20 +1,19 @@
 extends ../templates/layout
 
 block content 
-    h3 Editar una membresía
-        div 
-            form(action=`/membresias/edit/${membresia.membresia_id}`, method="post") 
-                label(for="tipo") Tipo:
-                input(type="text", name="tipo", value=`${membresia.tipo}`)
-                br
-                label(for="costo") Costo:
-                input(type="number", name="costo", value=`${membresia.costo}`, step="0.01")
-                br
-                label(for="duracion_dias") Duración en días:
-                input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`)
-                br
-                label(for="descripcion") Descripción:
-                textarea(name="descripcion")=membresia.descripcion
-                br
-                input(type="hidden", name="membresia_id", value=`${membresia.membresia_id}`)
-                input(type="submit", value="Guardar cambios")
+    h3 Editar membresía
+    form(action=`/membresias/edit/${membresia.membresia_id}`, method="post", class="needs-validation", novalidate)
+        .mb-3
+            label(for="tipo", class="form-label") Tipo:
+            input(type="text", name="tipo", value=`${membresia.tipo}`, class="form-control", required=true)
+        .mb-3
+            label(for="costo", class="form-label") Costo:
+            input(type="number", name="costo", value=`${membresia.costo}`, step="0.01", class="form-control", required=true)
+        .mb-3
+            label(for="duracion_dias", class="form-label") Duración en días:
+            input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`, class="form-control", required=true)
+        .mb-3
+            label(for="descripcion", class="form-label") Descripción:
+            textarea(name="descripcion", class="form-control")= membresia.descripcion
+        button(type="submit", class="btn btn-primary") Guardar
+        a(href="/membresias", class="btn btn-secondary") Cancelar

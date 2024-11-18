@@ -1,15 +1,14 @@
-// Solo estas línea debería estar presente
 const bcrypt = require('bcrypt');
 const db = require('../db');
 
 // Mostrar el formulario de login
-exports.mostrarLogin = (req, res) => {
+exports.mostrarFormularioLogin = (req, res) => {
     res.render('auth/login');  // Asegúrate de tener esta vista
 };
 
 
 // Función para procesar el login
-exports.login = (req, res) => {
+exports.procesarLogin = (req, res) => {
     const { nombre, password } = req.body;
 
     // Buscamos al usuario por su nombre
@@ -73,7 +72,7 @@ exports.registro = (req, res) => {
 exports.logout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.send('Error al cerrar sesión');
+            return res.status(500).send('Error al cerrar sesión');
         }
         res.redirect('/auth/login');  // Redirigir al login después de cerrar sesión
     });

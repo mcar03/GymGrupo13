@@ -1,26 +1,25 @@
 extends ../templates/layout
 
 block content 
-    h3 Editar un cliente
-        div 
-            form(action=`/clientes/edit/${cliente.cliente_id}`, method="post") 
-                label(for="nombre") Nombre:
-                input(type="text", name="nombre", value=`${cliente.nombre}`)
-                br
-                label(for="apellidos") Apellidos:
-                input(type="text", name="apellidos", value=`${cliente.apellidos}`)
-                br
-                label(for="telefono") Teléfono:
-                input(type="text", name="telefono", value=`${cliente.telefono}`)
-                br
-                label(for="email") Email:
-                input(type="email", name="email", value=`${cliente.email}`)
-                br
-                label(for="direccion") Dirección:
-                input(type="text", name="direccion", value=`${cliente.direccion}`)
-                br
-                label(for="fecha_nacimiento") Fecha de nacimiento:
-                input(type="date", name="fecha_nacimiento", value=`${cliente.fecha_nacimiento}`)
-                br
-                input(type="hidden", name="cliente_id", value=`${cliente.cliente_id}`)
-                input(type="submit", value="Guardar cambios")
+    h3 Editar cliente
+    form(action=`/clientes/edit/${cliente.cliente_id}`, method="post", class="needs-validation", novalidate)
+        .mb-3
+            label(for="nombre", class="form-label") Nombre:
+            input(type="text", name="nombre", value=`${cliente.nombre}`, class="form-control", required=true)
+        .mb-3
+            label(for="apellidos", class="form-label") Apellidos:
+            input(type="text", name="apellidos", value=`${cliente.apellidos}`, class="form-control", required=true)
+        .mb-3
+            label(for="telefono", class="form-label") Teléfono:
+            input(type="text", name="telefono", value=`${cliente.telefono}`, class="form-control", required=true)
+        .mb-3
+            label(for="email", class="form-label") Email:
+            input(type="email", name="email", value=`${cliente.email}`, class="form-control", required=true)
+        .mb-3
+            label(for="direccion", class="form-label") Dirección:
+            input(type="text", name="direccion", value=`${cliente.direccion}`, class="form-control", required=true)
+        .mb-3
+            label(for="fecha_nacimiento", class="form-label") Fecha de nacimiento:
+            input(type="date", name="fecha_nacimiento", value=`${cliente.fecha_nacimiento}`, class="form-control", required=true)
+        button(type="submit", class="btn btn-primary") Guardar
+        a(href="/clientes", class="btn btn-secondary") Cancelar
