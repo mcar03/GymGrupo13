@@ -1,21 +1,17 @@
 h2 Gym13
 nav
-      ul
-        li
-          a(href="/") Inicio
-        //- if user
-        li
-          a(href="/clientes") Clientes
-        li 
-          a(href="/clases") Clases de Entrenamiento
-        li 
-          a(href="/entrenadores") Entrenadores
-        li 
-          a(href="/membresias") Menbresias
-        li 
-          a(href="/inscripciones_membresias") Inscripciones 
-        li
-          a(href="/logout") Cerrar sesión
-        //- else
-          li
-            a(href="/login") Iniciar Sesión
+    ul(class="nav")
+        li(class="nav-item")
+            a(href="/", class="nav-link") Inicio
+        li(class="nav-item")
+            a(href="/clientes", class="nav-link") Clientes
+        li(class="nav-item")
+            a(href="/clases", class="nav-link") Clases de Entrenamiento
+        li(class="nav-item")
+            a(href="/entrenadores", class="nav-link") Entrenadores
+        li(class="nav-item")
+            a(href="/membresias", class="nav-link") Membresías
+        li(class="nav-item")
+            a(href="/inscripciones_membresias", class="nav-link") Inscripciones 
+        li(class="nav-item")
+            a(href="/auth/logout", class="nav-link") Cerrar sesión

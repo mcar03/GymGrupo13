@@ -1,23 +1,23 @@
 extends ../templates/layout
 
 block content
-  h1 Editar Entrenador
-  form(action=`/entrenadores/edit/${entrenador.entrenador_id}`, method="POST")
-    div
-      label(for="nombre") Nombre
-      input(type="text", name="nombre", id="nombre", value=entrenador.nombre, required=true)
-    div
-      label(for="apellido") Apellido
-      input(type="text", name="apellido", id="apellido", value=entrenador.apellido, required=true)
-    div
-      label(for="especialidad") Especialidad
-      input(type="text", name="especialidad", id="especialidad", value=entrenador.especialidad)
-    div
-      label(for="salario") Salario
-      input(type="number", name="salario", id="salario", value=entrenador.salario, step="0.01")
-    div
-      label(for="fecha_contratacion") Fecha de Contratación
-      input(type="date", name="fecha_contratacion", id="fecha_contratacion", value=entrenador.fecha_contratacion)
-    div
-      button(type="submit") Guardar Cambios
-    a(href="/entrenadores") Volver a la lista
+    h1 Editar Entrenador
+    div(class="container")
+        form(action=`/entrenadores/edit/${entrenador.entrenador_id}`, method="POST")
+            div(class="form-group")
+                label(for="nombre") Nombre
+                input(type="text", name="nombre", id="nombre", value=entrenador.nombre, class="form-control", required=true)
+            div(class="form-group")
+                label(for="apellido") Apellido
+                input(type="text", name="apellido", id="apellido", value=entrenador.apellido, class="form-control", required=true)
+            div(class="form-group")
+                label(for="especialidad") Especialidad
+                input(type="text", name="especialidad", id="especialidad", value=entrenador.especialidad, class="form-control")
+            div(class="form-group")
+                label(for="salario") Salario
+                input(type="number", name="salario", id="salario", value=entrenador.salario, class="form-control", step="0.01")
+            div(class="form-group")
+                label(for="fecha_contratacion") Fecha de Contratación
+                input(type="date", name="fecha_contratacion", id="fecha_contratacion", value=entrenador.fecha_contratacion, class="form-control")
+            button(type="submit", class="btn btn-primary") Guardar Cambios
+        a(href="/entrenadores", class="btn btn-secondary") Volver a la lista

@@ -1,27 +1,27 @@
-
 extends ../templates/layout
 
 block content
-  h1 Lista de Entrenadores
-  table(border = 1)
-    thead
-      tr
-        th Nombre
-        th Apellido
-        th Especialidad
-        th Salario
-        th Fecha de Contratación
-        th Acciones
-    tbody
-      each entrenador in entrenadores
-        tr
-          td= entrenador.nombre
-          td= entrenador.apellido
-          td= entrenador.especialidad
-          td= entrenador.salario
-          td= entrenador.fecha_contratacion
-          td
-            a(href=`/entrenadores/edit/${entrenador.entrenador_id}`) Editar
-            |
-            a(href=`/entrenadores/del/${entrenador.entrenador_id}`) Eliminar
-  a(href="/entrenadores/add") Agregar Nuevo Entrenador
+    div(class="container") 
+        h1 Lista de Entrenadores
+        table(class="table table-striped")
+            thead
+                tr
+                    th Nombre
+                    th Apellido
+                    th Especialidad
+                    th Salario
+                    th Fecha de Contratación
+                    th Acciones
+            tbody
+                each entrenador in entrenadores
+                    tr
+                        td= entrenador.nombre
+                        td= entrenador.apellido
+                        td= entrenador.especialidad
+                        td= entrenador.salario
+                        td= entrenador.fecha_contratacion
+                        td
+                            a(href=`/entrenadores/edit/${entrenador.entrenador_id}`, class="btn btn-primary btn-sm") Editar
+                            |
+                            a(href=`/entrenadores/del/${entrenador.entrenador_id}`, class="btn btn-danger btn-sm") Eliminar
+        a(href="/entrenadores/add", class="btn btn-success") Agregar Nuevo Entrenador

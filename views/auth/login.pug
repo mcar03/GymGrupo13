@@ -1,21 +1,15 @@
 extends ../templates/layout
 
 block content
-  h3 Iniciar sesión
-
-  // Formulario de inicio de sesión
-  form(action="/auth/login", method="POST")
-    div
-      label(for="nombre") Nombre:
-      input(type="text", id="nombre", name="nombre", required=true)
-
-    div
-      label(for="password") Contraseña:
-      input(type="password", id="password", name="password", required=true)
-
-    div
-      button(type="submit") Iniciar sesión
-
-  // Enlace para registrarse
-  p
-    a(href="/auth/register") No tienes cuenta? Regístrate aquí
+    div(class="container")
+        h3 Iniciar sesión
+        form(action="/auth/login", method="POST")
+            div(class="form-group")
+                label(for="nombre") Nombre:
+                input(type="text", id="nombre", name="nombre", class="form-control", required=true)
+            div(class="form-group")
+                label(for="password") Contraseña:
+                input(type="password", id="password", name="password", class="form-control", required=true)
+            button(type="submit", class="btn btn-primary") Iniciar sesión
+        p
+            a(href="/auth/register") No tienes cuenta? Regístrate aquí

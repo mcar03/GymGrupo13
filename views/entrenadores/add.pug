@@ -1,23 +1,23 @@
 extends ../templates/layout
 
 block content
-  h1 Agregar Nuevo Entrenador
-  form(action="/entrenadores/add", method="POST")
-    div
-      label(for="nombre") Nombre
-      input(type="text", name="nombre", id="nombre", required=true)
-    div
-      label(for="apellido") Apellido
-      input(type="text", name="apellido", id="apellido", required=true)
-    div
-      label(for="especialidad") Especialidad
-      input(type="text", name="especialidad", id="especialidad")
-    div
-      label(for="salario") Salario
-      input(type="number", name="salario", id="salario", step="0.01")
-    div
-      label(for="fecha_contratacion") Fecha de Contratación
-      input(type="date", name="fecha_contratacion", id="fecha_contratacion")
-    div
-      button(type="submit") Guardar
-    a(href="/entrenadores") Volver a la lista
+    h1 Agregar Nuevo Entrenador
+    div(class="container")
+        form(action="/entrenadores/add", method="POST")
+            div(class="form-group")
+                label(for="nombre") Nombre
+                input(type="text", name="nombre", id="nombre", class="form-control", required=true)
+            div(class="form-group")
+                label(for="apellido") Apellido
+                input(type="text", name="apellido", id="apellido", class="form-control", required=true)
+            div(class="form-group")
+                label(for="especialidad") Especialidad
+                input(type="text", name="especialidad", id="especialidad", class="form-control")
+            div(class="form-group")
+                label(for="salario") Salario
+                input(type="number", name="salario", id="salario", class="form-control", step="0.01")
+            div(class="form-group")
+                label(for="fecha_contratacion") Fecha de Contratación
+                input(type="date", name="fecha_contratacion", id="fecha_contratacion", class="form-control")
+            button(type="submit", class="btn btn-primary") Guardar
+        a(href="/entrenadores", class="btn btn-secondary") Volver a la lista

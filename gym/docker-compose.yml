@@ -17,4 +17,3 @@ services:
       - ${MYSQL_PORT}:3306
     volumes:
     - ./scripts:/docker-entrypoint-initdb.d
-    
