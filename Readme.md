@@ -984,3 +984,6 @@ exports.logout = (req, res) => {
 
 
 Hay que añadir que hemos utilizado bycrypt para cifrar las contraseñas, para que las password almacenadas en la base de datos sean seguras.g
+
+Te dejo por aqui tambien en enlace de nuestro repositorio git:
+https://github.com/mcar03/GymGrupo13
