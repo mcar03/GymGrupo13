@@ -59,28 +59,34 @@ exports.agregarClase = (req, res) => {
 exports.mostrarFormularioEditar = (req, res) => {
   const { id } = req.params;
 
-  // Obtener la clase por su ID
   db.query('SELECT * FROM clases WHERE clase_id = ?', [id], (err, claseResults) => {
     if (err) {
       console.error('Error al obtener la clase para editar:', err);
       return res.status(500).send('Error al obtener la clase');
     }
 
-    if (claseResults.length === 0) {
-      return res.status(404).send('Clase no encontrada');
-    }
-
-    // Obtener la lista de entrenadores
-    db.query('SELECT * FROM entrenadores', (err, entrenadores) => {
-      if (err) {
-        console.error('Error al obtener los entrenadores:', err);
-        return res.status(500).send('Error al obtener los entrenadores');
+    if (claseResults.length > 0) {
+      const clase = claseResults[0];
+      // Asegúrate de que fecha_registro esté en formato YYYY-MM-DD
+      if (clase.fecha_registro instanceof Date) {
+        clase.fecha_registro = clase.fecha_registro.toISOString().split('T')[0];
       }
 
-      res.render('clases/edit', { clase: claseResults[0], entrenadores: entrenadores });
-    });
+      db.query('SELECT * FROM entrenadores', (err, entrenadores) => {
+        if (err) {
+          console.error('Error al obtener los entrenadores:', err);
+          return res.status(500).send('Error al obtener los entrenadores');
+        }
+
+        res.render('clases/edit', { clase, entrenadores });
+      });
+    } else {
+      res.status(404).send('Clase no encontrada');
+    }
   });
 };
+
+
 
 // Editar una clase
 exports.editarClase = (req, res) => {

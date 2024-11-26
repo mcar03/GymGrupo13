@@ -51,15 +51,27 @@ exports.inscripcionMembresiaDel = (req, res) => {
 
 exports.inscripcionMembresiaEditFormulario = (req, res) => {
   const { id } = req.params;
-  db.query('SELECT * FROM inscripciones_membresias WHERE inscripcion_id=?', [id], (error, respuesta) => {
-    if (error) return res.send('ERROR al INTENTAR ACTUALIZAR LA INSCRIPCIÓN');
+
+  db.query('SELECT * FROM inscripciones_membresias WHERE inscripcion_id = ?', [id], (error, respuesta) => {
+    if (error) {
+      return res.send('ERROR al INTENTAR ACTUALIZAR LA INSCRIPCIÓN');
+    }
+
     if (respuesta.length > 0) {
-      res.render('inscripciones_membresias/edit', { inscripcion: respuesta[0] });
+      const inscripcion = respuesta[0];
+      // Asegúrate de que fecha_fin esté en formato YYYY-MM-DD
+      if (inscripcion.fecha_fin instanceof Date) {
+        inscripcion.fecha_fin = inscripcion.fecha_fin.toISOString().split('T')[0];
+      }
+
+      res.render('inscripciones_membresias/edit', { inscripcion });
     } else {
       res.send('ERROR al INTENTAR ACTUALIZAR LA INSCRIPCIÓN, NO EXISTE');
     }
   });
 };
+
+
 
 exports.inscripcionMembresiaEdit = (req, res) => {
   const { inscripcion_id, cliente_id, membresia_id, fecha_fin, estado } = req.body;
