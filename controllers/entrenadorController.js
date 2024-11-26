@@ -45,9 +45,20 @@ exports.mostrarFormularioEditar = (req, res) => {
     if (results.length === 0) {
       return res.status(404).send('Entrenador no encontrado');
     }
-    res.render('entrenadores/edit', { entrenador: results[0] });
+
+    const entrenador = results[0];
+    // Asegúrate de que fecha_contratacion esté en formato YYYY-MM-DD si existe
+    if (entrenador.fecha_contratacion instanceof Date) {
+      entrenador.fecha_contratacion = entrenador.fecha_contratacion.toISOString().split('T')[0];
+    }
+
+    // Renderiza el formulario de edición con los datos del entrenador
+    res.render('entrenadores/edit', { entrenador });
   });
 };
+
+
+
 
 exports.editarEntrenador = (req, res) => {
   const { id } = req.params;

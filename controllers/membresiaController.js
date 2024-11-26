@@ -59,23 +59,23 @@ exports.membresiaDel = (req, res) => {
 
 exports.membresiaEditFormulario = (req, res) => {
   const { id } = req.params;
-  if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
-  else
-    db.query(
-      'SELECT * FROM membresias WHERE membresia_id=?',
-      id,
-      (error, respuesta) => {
-        if (error) res.send('ERROR al INTENTAR ACTUALIZAR LA MEMBRESÍA');
-        else {
-          if (respuesta.length > 0) {
-            res.render('membresias/edit', { membresia: respuesta[0] });
-          } else {
-            res.send('ERROR al INTENTAR ACTUALIZAR LA MEMBRESÍA, NO EXISTE');
-          }
-        }
-      }
-    );
+
+  db.query('SELECT * FROM membresias WHERE membresia_id = ?', [id], (error, respuesta) => {
+    if (error) {
+      return res.send('ERROR al INTENTAR ACTUALIZAR LA MEMBRESÍA');
+    }
+
+    if (respuesta.length > 0) {
+      const membresia = respuesta[0];
+      // No hay campos de fecha en membresías, pero si se agregaran, se debe seguir este patrón
+
+      res.render('membresias/edit', { membresia });
+    } else {
+      res.send('ERROR al INTENTAR ACTUALIZAR LA MEMBRESÍA, NO EXISTE');
+    }
+  });
 };
+
 
 exports.membresiaEdit = (req, res) => {
   const { membresia_id, tipo, costo, duracion_dias, descripcion } = req.body;

@@ -79,24 +79,23 @@ exports.clienteDel = (req, res) => {
 // Formulario para editar un cliente
 exports.clienteEditFormulario = (req, res) => {
   const { id } = req.params;
-  //console.log(id)
-  if (isNaN(id)) res.send('PARAMETROS INCORRECTOS');
-  else
-    db.query(
-      'SELECT * FROM clientes WHERE cliente_id=?',
-      id,
-      (error, respuesta) => {
-        if (error) res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE');
-        else {
-          if (respuesta.length > 0) {
-            res.render('clientes/edit', { cliente: respuesta[0] });
-          } else {
-            res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE, NO EXISTE');
-          }
-        }
+  if (isNaN(id)) return res.send('PARÁMETROS INCORRECTOS');
+
+  db.query('SELECT * FROM clientes WHERE cliente_id = ?', [id], (error, respuesta) => {
+    if (error) return res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE');
+    if (respuesta.length > 0) {
+      const cliente = respuesta[0];
+      // Asegúrate de que fecha_nacimiento esté en formato YYYY-MM-DD
+      if (cliente.fecha_nacimiento instanceof Date) {
+        cliente.fecha_nacimiento = cliente.fecha_nacimiento.toISOString().split('T')[0];
       }
-    );
+      res.render('clientes/edit', { cliente });
+    } else {
+      res.send('ERROR al INTENTAR ACTUALIZAR EL CLIENTE, NO EXISTE');
+    }
+  });
 };
+
 
 // Actualizar un cliente
 exports.clienteEdit = (req, res) => {
