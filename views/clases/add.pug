@@ -1,26 +1,25 @@
 extends ../templates/layout
 
-
 block content
-  h1 Agregar Nueva Clase
-  form(action="/clases/add", method="POST")
-    div
-      label(for="nombre") Nombre de la Clase
-      input(type="text", name="nombre", id="nombre", required=true)
-    div
-      label(for="descripcion") Descripción
-      textarea(name="descripcion", id="descripcion") 
-    div
-      label(for="capacidad") Capacidad
-      input(type="number", name="capacidad", id="capacidad", required=true)
-    div
-      label(for="duracion_minutos") Duración (en minutos)
-      input(type="number", name="duracion_minutos", id="duracion_minutos", required=true)
-    div
-      label(for="entrenador_id") Entrenador
-      select(name="entrenador_id", id="entrenador_id", required=true)
-        each entrenador in entrenadores
-          option(value=entrenador.entrenador_id)= entrenador.nombre + ' ' + entrenador.apellido
-    div
-      button(type="submit") Guardar
-    a(href="/clases") Volver a la lista de clases
+    h1 Agregar Nueva Clase
+    div(class="container")
+        form(action="/clases/add", method="POST")
+            div(class="form-group")
+                label(for="nombre") Nombre de la Clase
+                input(type="text", name="nombre", id="nombre", class="form-control", required=true)
+            div(class="form-group")
+                label(for="descripcion") Descripción
+                textarea(name="descripcion", id="descripcion", class="form-control") 
+            div(class="form-group")
+                label(for="capacidad") Capacidad
+                input(type="number", name="capacidad", id="capacidad", class="form-control", required=true)
+            div(class="form-group")
+                label(for="duracion_minutos") Duración (en minutos)
+                input(type="number", name="duracion_minutos", id="duracion_minutos", class="form-control", required=true)
+            div(class="form-group")
+                label(for="entrenador_id") Entrenador
+                select(name="entrenador_id", id="entrenador_id", class="form-control", required=true)
+                    each entrenador in entrenadores
+                        option(value=entrenador.entrenador_id)= entrenador.nombre + ' ' + entrenador.apellido
+            button(type="submit", class="btn btn-primary") Guardar
+        a(href="/clases", class="btn btn-secondary") Volver a la lista de clases

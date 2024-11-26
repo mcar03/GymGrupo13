@@ -1,29 +1,30 @@
+//- views/clases/list.pug
 extends ../templates/layout
 
-
 block content
-  h1 Lista de Clases
-  table(border=1)
-    thead
-      tr
-        th Nombre
-        th Descripción
-        th Capacidad
-        th Duración (min)
-        th Entrenador
-        th Fecha de Registro
-        th Acciones
-    tbody
-      each clase in clases
-        tr
-          td= clase.nombre
-          td= clase.descripcion
-          td= clase.capacidad
-          td= clase.duracion_minutos
-          td= clase.entrenador_nombre + ' ' + clase.entrenador_apellido
-          td= clase.fecha_registro
-          td
-            a(href=`/clases/edit/${clase.clase_id}`) Editar
-            |
-            a(href=`/clases/delete/${clase.clase_id}`) Eliminar
-  a(href="/clases/add") Agregar Nueva Clase
+    h1 Lista de Clases
+    div(class="container")
+        table(class="table table-striped")
+            thead
+                tr
+                    th Nombre
+                    th Descripción
+                    th Capacidad
+                    th Duración (min)
+                    th Entrenador
+                    th Fecha de Registro
+                    th Acciones
+            tbody
+                each clase in clases
+                    tr
+                        td= clase.nombre
+                        td= clase.descripcion
+                        td= clase.capacidad
+                        td= clase.duracion_minutos
+                        td= clase.entrenador_nombre + ' ' + clase.entrenador_apellido
+                        td= clase.fecha_registro
+                        td
+                            a(href=`/clases/edit/${clase.clase_id}`, class="btn btn-primary btn-sm") Editar
+                            |
+                            a(href=`/clases/del/${clase.clase_id}`, class="btn btn-danger btn-sm") Eliminar
+        a(href="/clases/add", class="btn btn-success") Agregar Nueva Clase

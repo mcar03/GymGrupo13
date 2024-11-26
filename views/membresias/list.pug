@@ -1,9 +1,9 @@
 extends ../templates/layout
 
 block content
-    div 
+    div(class="container") 
         h3 Listado de membresías
-        table(border=1)
+        table(class="table table-striped")
             thead 
                 tr
                     th ID
@@ -24,9 +24,8 @@ block content
                         td=membresia.descripcion
                         td=membresia.fecha_registro
                         td 
-                            a(href=`/membresias/del/${membresia.membresia_id}`) Borrar
+                            a(href=`/membresias/del/${membresia.membresia_id}`, class="btn btn-danger btn-sm") Borrar
                         td 
-                            a(href=`/membresias/edit/${membresia.membresia_id}`) Editar
+                            a(href=`/membresias/edit/${membresia.membresia_id}`, class="btn btn-primary btn-sm") Editar
         p 
-            a(href="/membresias/add") Añadir una nueva membresía
-
+            a(href="/membresias/add", class="btn btn-success") Añadir una nueva membresía

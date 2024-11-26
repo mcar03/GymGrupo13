@@ -1,9 +1,9 @@
 extends ../templates/layout
 
 block content
-    div 
+    div(class="container") 
         h3 Listado de inscripciones a membresías
-        table(border=1)
+        table(class="table table-striped")
             thead 
                 tr
                     th ID
@@ -24,8 +24,8 @@ block content
                         td=inscripcion.fecha_fin
                         td=inscripcion.estado
                         td 
-                            a(href=`/inscripciones_membresias/del/${inscripcion.inscripcion_id}`) Borrar
+                            a(href=`/inscripciones_membresias/del/${inscripcion.inscripcion_id}`, class="btn btn-danger btn-sm") Borrar
                         td 
-                            a(href=`/inscripciones_membresias/edit/${inscripcion.inscripcion_id}`) Editar
+                            a(href=`/inscripciones_membresias/edit/${inscripcion.inscripcion_id}`, class="btn btn-primary btn-sm") Editar
         p 
-            a(href="/inscripciones_membresias/add") Añadir una nueva inscripción a membresía
+            a(href="/inscripciones_membresias/add", class="btn btn-success") Añadir una nueva inscripción a membresía

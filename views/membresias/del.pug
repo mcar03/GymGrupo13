@@ -2,19 +2,19 @@ extends ../templates/layout
 
 block content 
     h3 Borrar una membresía
-        div 
-            form(action=`/membresias/del/${membresia.membresia_id}`, method="post") 
+    div(class="container")
+        form(action=`/membresias/del/${membresia.membresia_id}`, method="post") 
+            div(class="form-group")
                 label(for="tipo") Tipo:
-                input(type="text", name="tipo", value=`${membresia.tipo}`, disabled)
-                br
+                input(type="text", name="tipo", value=`${membresia.tipo}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="costo") Costo:
-                input(type="number", name="costo", value=`${membresia.costo}`, disabled)
-                br
+                input(type="number", name="costo", value=`${membresia.costo}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="duracion_dias") Duración en días:
-                input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`, disabled)
-                br
+                input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="descripcion") Descripción:
-                textarea(name="descripcion", disabled)=membresia.descripcion
-                br
-                input(type="hidden", name="membresia_id", value=`${membresia.membresia_id}`)
-                input(type="submit", value="Eliminar")
+                textarea(name="descripcion", disabled, class="form-control")=membresia.descripcion
+            input(type="hidden", name="membresia_id", value=`${membresia.membresia_id}`)
+            button(type="submit", class="btn btn-danger") Eliminar

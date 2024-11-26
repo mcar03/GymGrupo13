@@ -1,6 +1,7 @@
+// routes/authRouter.js
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const authController = require('../controllers/authController'); // Asegúrate de que la ruta sea correcta
 
 // Ruta para mostrar el login
 router.get('/login', authController.mostrarLogin);
@@ -15,6 +16,6 @@ router.get('/register', authController.mostrarRegistro);
 router.post('/register', authController.registro);
 
 // Ruta para cerrar sesión
-router.get('/logout', authController.logout);
+router.get('/logout', authController.logout); // Asegúrate de que `logout` esté definido en el controlador
 
 module.exports = router;

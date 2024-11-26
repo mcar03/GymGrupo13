@@ -1,13 +1,13 @@
 extends ../templates/layout
 
 block content
-    h3 Registrarse
-    form(action="/auth/register", method="POST")
-        div
-            label(for="nombre") Nombre:
-            input(type="text", id="nombre", name="nombre", required=true)
-        div
-            label(for="password") Contraseña:
-            input(type="password", id="password", name="password", required=true)
-        div
-            button(type="submit") Registrarse
+    div(class="container")
+        h3 Registrarse
+        form(action="/auth/register", method="POST")
+            div(class="form-group")
+                label(for="nombre") Nombre:
+                input(type="text", id="nombre", name="nombre", class="form-control", required=true)
+            div(class="form-group")
+                label(for="password") Contraseña:
+                input(type="password", id="password", name="password", class="form-control", required=true)
+            button(type="submit", class="btn btn-primary") Registrarse

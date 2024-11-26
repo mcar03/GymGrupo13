@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS usuarios;
 
 
---Tabla para los Usuarios de la app
+-- Tabla para los Usuarios de la app
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) UNIQUE NOT NULL,

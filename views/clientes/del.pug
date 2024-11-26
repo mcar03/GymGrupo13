@@ -2,25 +2,25 @@ extends ../templates/layout
 
 block content 
     h3 Borrar un cliente
-        div 
-            form(action=`/clientes/del/${cliente.cliente_id}`, method="post") 
+    div(class="container") 
+        form(action=`/clientes/del/${cliente.cliente_id}`, method="post") 
+            div(class="form-group")
                 label(for="nombre") Nombre:
-                input(type="text", name="nombre", value=`${cliente.nombre}`, disabled)
-                br
+                input(type="text", name="nombre", value=`${cliente.nombre}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="apellidos") Apellidos:
-                input(type="text", name="apellidos", value=`${cliente.apellidos}`, disabled)
-                br
+                input(type="text", name="apellidos", value=`${cliente.apellidos}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="telefono") Teléfono:
-                input(type="text", name="telefono", value=`${cliente.telefono}`, disabled)
-                br
+                input(type="text", name="telefono", value=`${cliente.telefono}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="email") Email:
-                input(type="email", name="email", value=`${cliente.email}`, disabled)
-                br
+                input(type="email", name="email", value=`${cliente.email}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="direccion") Dirección:
-                input(type="text", name="direccion", value=`${cliente.direccion}`, disabled)
-                br
+                input(type="text", name="direccion", value=`${cliente.direccion}`, class="form-control", disabled)
+            div(class="form-group")
                 label(for="fecha_nacimiento") Fecha de nacimiento:
-                input(type="date", name="fecha_nacimiento", value=`${cliente.fecha_nacimiento}`, disabled)
-                br
-                input(type="hidden", name="cliente_id", value=`${cliente.cliente_id}`)
-                input(type="submit", value="Eliminar")
+                input(type="date", name="fecha_nacimiento", value=`${cliente.fecha_nacimiento}`, class="form-control", disabled)
+            input(type="hidden", name="cliente_id", value=`${cliente.cliente_id}`)
+            button(type="submit", class="btn btn-danger") Eliminar

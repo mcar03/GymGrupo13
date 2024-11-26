@@ -2,19 +2,19 @@ extends ../templates/layout
 
 block content 
     h3 Editar una membresía
-        div 
-            form(action=`/membresias/edit/${membresia.membresia_id}`, method="post") 
+    div(class="container") 
+        form(action=`/membresias/edit/${membresia.membresia_id}`, method="post") 
+            div(class="form-group")
                 label(for="tipo") Tipo:
-                input(type="text", name="tipo", value=`${membresia.tipo}`)
-                br
+                input(type="text", name="tipo", value=`${membresia.tipo}`, class="form-control")
+            div(class="form-group")
                 label(for="costo") Costo:
-                input(type="number", name="costo", value=`${membresia.costo}`, step="0.01")
-                br
+                input(type="number", name="costo", value=`${membresia.costo}`, class="form-control", step="0.01")
+            div(class="form-group")
                 label(for="duracion_dias") Duración en días:
-                input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`)
-                br
+                input(type="number", name="duracion_dias", value=`${membresia.duracion_dias}`, class="form-control")
+            div(class="form-group")
                 label(for="descripcion") Descripción:
-                textarea(name="descripcion")=membresia.descripcion
-                br
-                input(type="hidden", name="membresia_id", value=`${membresia.membresia_id}`)
-                input(type="submit", value="Guardar cambios")
+                textarea(name="descripcion", class="form-control")=membresia.descripcion
+            input(type="hidden", name="membresia_id", value=`${membresia.membresia_id}`)
+            button(type="submit", class="btn btn-primary") Guardar cambios
