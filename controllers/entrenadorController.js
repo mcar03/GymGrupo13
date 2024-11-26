@@ -1,16 +1,37 @@
 const db = require('../db');
 
 exports.listarEntrenadores = (req, res) => {
-  const query = 'SELECT * FROM entrenadores';
+  const especialidadFiltro = req.query.especialidad || ''; // Tomamos el valor de especialidad desde la query string (si existe)
   
-  db.query(query, (err, resultados) => {
+  // Si se especifica una especialidad, filtramos por ella
+  let query = 'SELECT * FROM entrenadores';
+  if (especialidadFiltro) {
+    query += ' WHERE especialidad = ?';
+  }
+
+  db.query(query, especialidadFiltro ? [especialidadFiltro] : [], (err, resultados) => {
     if (err) {
       console.error('Error al obtener los entrenadores:', err);
       return res.status(500).send('Error al obtener los entrenadores');
     }
-    res.render('entrenadores/list', { entrenadores: resultados });
+
+    // Consultamos las especialidades disponibles para la lista desplegable
+    db.query('SELECT DISTINCT especialidad FROM entrenadores', (err, especialidades) => {
+      if (err) {
+        console.error('Error al obtener especialidades:', err);
+        return res.status(500).send('Error al obtener las especialidades');
+      }
+      
+      // Renderizamos la vista, pasando tanto los entrenadores como las especialidades
+      res.render('entrenadores/list', { 
+        entrenadores: resultados,
+        especialidades: especialidades,
+        especialidadSeleccionada: especialidadFiltro // Pasamos la especialidad seleccionada para mantenerla en la lista desplegable
+      });
+    });
   });
 };
+
 
 exports.mostrarFormularioAgregar = (req, res) => {
   res.render('entrenadores/add');

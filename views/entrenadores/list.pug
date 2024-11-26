@@ -3,7 +3,18 @@ extends ../templates/layout
 block content
     div(class="container") 
         h1 Lista de Entrenadores
-        table(class="table table-striped")
+
+        // Formulario de filtro automático
+        form(action='/entrenadores', method='get')
+            div(class="form-group")
+                label(for="especialidad") Filtrar por Especialidad:
+                select(id="especialidad" name="especialidad" class="form-control" onchange="this.form.submit()")
+                    option(value="") Selecciona una especialidad
+                    each especialidad in especialidades
+                        option(value=especialidad.especialidad selected=especialidad.especialidad == especialidadSeleccionada) 
+                            = especialidad.especialidad
+
+        table(class="table table-striped mt-3")
             thead
                 tr
                     th Nombre
@@ -24,4 +35,5 @@ block content
                             a(href=`/entrenadores/edit/${entrenador.entrenador_id}`, class="btn btn-primary btn-sm") Editar
                             |
                             a(href=`/entrenadores/del/${entrenador.entrenador_id}`, class="btn btn-danger btn-sm") Eliminar
-        a(href="/entrenadores/add", class="btn btn-success") Agregar Nuevo Entrenador
+
+        a(href="/entrenadores/add", class="btn btn-success mt-3") Agregar Nuevo Entrenador
